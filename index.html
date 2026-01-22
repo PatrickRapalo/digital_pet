@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeBuddy - Learn to Code with Your AI Pet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Home Menu -->
+    <div id="home-menu" class="home-menu">
+        <div class="home-container">
+            <h1 class="home-title">CodeBuddy</h1>
+            <p class="home-subtitle">Your AI-Powered Coding Companion</p>
+
+            <!-- Pet Customization Section -->
+            <section class="home-section pet-customization">
+                <h2>Your Buddy</h2>
+                <div class="pet-preview-large">
+                    <div id="home-pet" class="pet blob">
+                        <div class="pet-extras">
+                            <div class="ear left"></div>
+                            <div class="ear right"></div>
+                            <div class="horn"></div>
+                            <div class="antenna left"></div>
+                            <div class="antenna right"></div>
+                            <div class="wing left"></div>
+                            <div class="wing right"></div>
+                        </div>
+                        <div class="pet-body"></div>
+                        <div class="pet-face">
+                            <div class="eye left"></div>
+                            <div class="eye right"></div>
+                            <div class="mouth"></div>
+                            <div class="cheek left"></div>
+                            <div class="cheek right"></div>
+                            <div class="whisker left"></div>
+                            <div class="whisker right"></div>
+                        </div>
+                        <div class="pet-feet">
+                            <div class="foot left"></div>
+                            <div class="foot right"></div>
+                        </div>
+                        <div class="tail"></div>
+                    </div>
+                </div>
+                <div class="pet-name-edit">
+                    <input type="text" id="home-pet-name" class="pet-name-input" placeholder="Name your buddy..." maxlength="12" value="CodeBuddy">
+                </div>
+                <div class="creature-selection home-creatures" id="home-creature-selection">
+                    <div class="creature-option selected" data-creature="blob">
+                        <div class="creature-preview blob-preview"></div>
+                        <span>Blob</span>
+                    </div>
+                    <div class="creature-option" data-creature="cat">
+                        <div class="creature-preview cat-preview"></div>
+                        <span>Cat</span>
+                    </div>
+                    <div class="creature-option" data-creature="bunny">
+                        <div class="creature-preview bunny-preview"></div>
+                        <span>Bunny</span>
+                    </div>
+                    <div class="creature-option" data-creature="alien">
+                        <div class="creature-preview alien-preview"></div>
+                        <span>Alien</span>
+                    </div>
+                    <div class="creature-option" data-creature="dragon">
+                        <div class="creature-preview dragon-preview"></div>
+                        <span>Dragon</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Track Selection Section -->
+            <section class="home-section track-selection">
+                <h2>Choose Your Path</h2>
+                <div class="tracks-grid">
+                    <!-- JavaScript Track -->
+                    <div class="track-card selected" data-track="javascript">
+                        <div class="track-icon">JS</div>
+                        <h3>JavaScript</h3>
+                        <p class="track-focus">Web Development</p>
+                        <p class="track-description">Build interactive websites and web apps. Learn the language of the web!</p>
+                        <div class="track-topics">
+                            <span>Variables</span>
+                            <span>Functions</span>
+                            <span>DOM</span>
+                            <span>Events</span>
+                        </div>
+                    </div>
+
+                    <!-- Python Track -->
+                    <div class="track-card" data-track="python">
+                        <div class="track-icon">PY</div>
+                        <h3>Python</h3>
+                        <p class="track-focus">Data & Analytics</p>
+                        <p class="track-description">Analyze data and build smart programs. The most beginner-friendly language!</p>
+                        <div class="track-topics">
+                            <span>Variables</span>
+                            <span>Lists</span>
+                            <span>Data</span>
+                            <span>Analysis</span>
+                        </div>
+                    </div>
+
+                    <!-- C++ Track -->
+                    <div class="track-card" data-track="cpp">
+                        <div class="track-icon">C++</div>
+                        <h3>C++</h3>
+                        <p class="track-focus">Game Development</p>
+                        <p class="track-description">Create games and high-performance apps. The power of low-level programming!</p>
+                        <div class="track-topics">
+                            <span>Variables</span>
+                            <span>Classes</span>
+                            <span>Memory</span>
+                            <span>Games</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Summary (if returning user) -->
+            <section class="home-section stats-summary" id="home-stats" style="display: none;">
+                <h2>Your Progress</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-value" id="home-level">1</span>
+                        <span class="stat-name">Level</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="home-lessons">0</span>
+                        <span class="stat-name">Lessons</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="home-streak">0</span>
+                        <span class="stat-name">Day Streak</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value" id="home-xp">0</span>
+                        <span class="stat-name">Total XP</span>
+                    </div>
+                </div>
+            </section>
+
+            <button id="start-learning-home" class="start-btn-large">Start Learning</button>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="app-header hidden" id="app-header">
+        <div class="header-left">
+            <button id="home-btn" class="home-btn" title="Home">&#8962;</button>
+            <h1 class="app-title">CodeBuddy</h1>
+            <span class="current-track-badge" id="current-track-badge">JavaScript</span>
+        </div>
+        <div class="header-center">
+            <div class="level-display">
+                <span class="level-badge">Level <span id="current-level">1</span></span>
+                <div class="xp-bar-container">
+                    <div id="xp-bar" class="xp-bar" style="width: 0%"></div>
+                </div>
+                <span class="xp-text"><span id="current-xp">0</span> / <span id="xp-needed">100</span> XP</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <button id="settings-btn" class="settings-btn" title="Settings">
+                <span class="gear-icon">&#9881;</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content hidden" id="main-content">
+        <!-- Lesson Panel (Left) -->
+        <aside class="lesson-panel">
+            <div class="panel-header modules-header" id="modules-toggle">
+                <h2>Lessons</h2>
+                <span class="toggle-icon" id="toggle-icon">&#9660;</span>
+            </div>
+            <div class="modules-list" id="modules-list">
+                <!-- Modules populated by JS -->
+            </div>
+            <div class="lesson-content" id="lesson-content">
+                <div class="lesson-header">
+                    <div class="lesson-title" id="lesson-title">Welcome to CodeBuddy!</div>
+                    <div class="lesson-xp" id="lesson-xp"></div>
+                </div>
+                <div class="lesson-description" id="lesson-description">
+                    Select a lesson from the modules above to get started.
+                </div>
+                <div class="lesson-instructions" id="lesson-instructions"></div>
+            </div>
+        </aside>
+
+        <!-- Code Editor Panel (Center) -->
+        <section class="editor-panel">
+            <div class="panel-header">
+                <h2>Code Editor</h2>
+                <div class="language-badge" id="language-badge">JavaScript</div>
+            </div>
+            <div class="editor-container">
+                <textarea id="code-editor" class="code-editor" placeholder="// Write your code here..." spellcheck="false"></textarea>
+            </div>
+            <div class="output-container">
+                <div class="panel-header">
+                    <h3>Output</h3>
+                    <button id="clear-output-btn" class="small-btn">Clear</button>
+                </div>
+                <div id="output-console" class="output-console"></div>
+            </div>
+        </section>
+
+        <!-- Pet Sidebar (Right) -->
+        <aside class="pet-sidebar">
+            <div class="pet-header">
+                <span id="buddy-name">CodeBuddy</span>
+                <span id="buddy-title" class="buddy-title">Coding Apprentice</span>
+            </div>
+
+            <div class="pet-display-area">
+                <div id="pet" class="pet blob">
+                    <div class="pet-extras">
+                        <div class="ear left"></div>
+                        <div class="ear right"></div>
+                        <div class="horn"></div>
+                        <div class="antenna left"></div>
+                        <div class="antenna right"></div>
+                        <div class="wing left"></div>
+                        <div class="wing right"></div>
+                    </div>
+                    <div class="pet-body"></div>
+                    <div class="pet-face">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="mouth"></div>
+                        <div class="cheek left"></div>
+                        <div class="cheek right"></div>
+                        <div class="whisker left"></div>
+                        <div class="whisker right"></div>
+                    </div>
+                    <div class="pet-feet">
+                        <div class="foot left"></div>
+                        <div class="foot right"></div>
+                    </div>
+                    <div class="tail"></div>
+                </div>
+            </div>
+
+            <div class="buddy-stats">
+                <div class="stat">
+                    <span class="stat-label">Knowledge</span>
+                    <div class="stat-bar">
+                        <div id="knowledge-bar" class="stat-fill knowledge" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Happiness</span>
+                    <div class="stat-bar">
+                        <div id="happiness-bar" class="stat-fill happiness" style="width: 100%"></div>
+                    </div>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Streak</span>
+                    <div class="stat-bar">
+                        <div id="streak-bar" class="stat-fill streak" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="streak-counter">
+                <span class="streak-icon">&#128293;</span>
+                <span id="streak-count">0</span> day streak
+            </div>
+
+            <div class="chat-bubble" id="chat-bubble">
+                <p id="buddy-message">Hi there! I'm CodeBuddy, your coding companion. Let's learn to code together!</p>
+            </div>
+
+            <div class="achievements-preview">
+                <h4>Recent Achievements</h4>
+                <div id="achievements-list" class="achievements-list">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Action Bar (Bottom) -->
+    <footer class="action-bar hidden" id="action-bar">
+        <button id="run-btn" class="action-btn primary">
+            <span class="btn-icon">&#9654;</span>
+            <span class="btn-text">Run Code</span>
+        </button>
+        <button id="hint-btn" class="action-btn secondary">
+            <span class="btn-icon">&#128161;</span>
+            <span class="btn-text">Hint</span>
+        </button>
+        <button id="next-btn" class="action-btn success" disabled>
+            <span class="btn-icon">&#10132;</span>
+            <span class="btn-text">Next Lesson</span>
+        </button>
+        <button id="ask-ai-btn" class="action-btn ai-btn" style="display: none;">
+            <span class="btn-icon">&#129302;</span>
+            <span class="btn-text">Ask CodeBuddy</span>
+        </button>
+    </footer>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button id="close-settings" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="setting-group">
+                    <h3>Choose Your Buddy</h3>
+                    <div class="creature-selection" id="creature-selection">
+                        <div class="creature-option selected" data-creature="blob">
+                            <div class="creature-preview blob-preview"></div>
+                            <span>Blob</span>
+                        </div>
+                        <div class="creature-option" data-creature="cat">
+                            <div class="creature-preview cat-preview"></div>
+                            <span>Cat</span>
+                        </div>
+                        <div class="creature-option" data-creature="bunny">
+                            <div class="creature-preview bunny-preview"></div>
+                            <span>Bunny</span>
+                        </div>
+                        <div class="creature-option" data-creature="alien">
+                            <div class="creature-preview alien-preview"></div>
+                            <span>Alien</span>
+                        </div>
+                        <div class="creature-option" data-creature="dragon">
+                            <div class="creature-preview dragon-preview"></div>
+                            <span>Dragon</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="setting-group">
+                    <h3>Buddy Name</h3>
+                    <input type="text" id="buddy-name-input" class="setting-input" placeholder="Enter name..." maxlength="12">
+                </div>
+                <div class="setting-group">
+                    <h3>AI Enhancement (Optional)</h3>
+                    <p class="setting-description">Add your API key to unlock enhanced AI features like personalized hints and code feedback.</p>
+                    <select id="ai-provider" class="setting-select">
+                        <option value="">No AI (Built-in hints only)</option>
+                        <option value="openai">OpenAI</option>
+                        <option value="anthropic">Anthropic (Claude)</option>
+                    </select>
+                    <input type="password" id="api-key-input" class="setting-input" placeholder="Enter API key..." style="display: none;">
+                </div>
+                <div class="setting-group">
+                    <h3>Reset Progress</h3>
+                    <button id="reset-progress-btn" class="danger-btn">Reset All Progress</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-settings-btn" class="primary-btn">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Modal (First Time) -->
+    <div id="welcome-modal" class="modal hidden">
+        <div class="modal-content welcome-content">
+            <h2>Welcome to CodeBuddy!</h2>
+            <p>Your AI-powered coding companion is here to help you learn programming!</p>
+
+            <div class="welcome-section">
+                <h3>Choose Your Buddy</h3>
+                <div class="creature-selection" id="welcome-creature-selection">
+                    <div class="creature-option selected" data-creature="blob">
+                        <div class="creature-preview blob-preview"></div>
+                        <span>Blob</span>
+                    </div>
+                    <div class="creature-option" data-creature="cat">
+                        <div class="creature-preview cat-preview"></div>
+                        <span>Cat</span>
+                    </div>
+                    <div class="creature-option" data-creature="bunny">
+                        <div class="creature-preview bunny-preview"></div>
+                        <span>Bunny</span>
+                    </div>
+                    <div class="creature-option" data-creature="alien">
+                        <div class="creature-preview alien-preview"></div>
+                        <span>Alien</span>
+                    </div>
+                    <div class="creature-option" data-creature="dragon">
+                        <div class="creature-preview dragon-preview"></div>
+                        <span>Dragon</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="welcome-section">
+                <h3>Name Your Buddy</h3>
+                <input type="text" id="welcome-name-input" class="setting-input" placeholder="Enter a name..." maxlength="12" value="CodeBuddy">
+            </div>
+
+            <button id="start-learning-btn" class="primary-btn large">Start Learning!</button>
+        </div>
+    </div>
+
+    <!-- Ask AI Modal -->
+    <div id="ask-ai-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ask CodeBuddy</h2>
+                <button id="close-ask-ai" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="ai-chat-history" class="ai-chat-history"></div>
+                <div class="ai-input-area">
+                    <textarea id="ai-question-input" class="ai-input" placeholder="Ask a question about the lesson or your code..."></textarea>
+                    <button id="send-ai-question" class="primary-btn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/lessons.js"></script>
+    <script src="js/codeRunner.js"></script>
+    <script src="js/codingBuddy.js"></script>
+    <script src="js/aiHelper.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
