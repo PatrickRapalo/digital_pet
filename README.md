@@ -1,3 +1,5 @@
+[Demo](https://patrickrapalo.github.io/digital_pet/)
+
 # CodeBuddy - AI-Powered Coding Tutor
 
 An interactive coding tutor with a virtual pet companion that helps you learn programming fundamentals.
